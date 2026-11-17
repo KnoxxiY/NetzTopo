@@ -1,66 +1,133 @@
-# NetzTopo 1.8
+<div align="center">
 
-Scannt das Netzwerk, erkennt alle Geräte und zeigt, **welches Gerät an welchem Switch-Port hängt**: als Netzplan, Karte und Switch-Ansicht.
+# 🔀 NetzTopo
 
-## Start
+**Netzwerk-Scanner und Topologie-Dokumentation für kleine und mittlere Netze.**
 
-| Version | So geht's |
+Findet alle Geräte, zeigt, **welches Gerät an welchem Switch-Port hängt**, und erzeugt daraus Netzplan, Schrank-Ansicht, Sicherheitsnote und eine Excel-Dokumentation.
+
+Kostenlos · ohne Installation · ohne Cloud · ohne Admin-Rechte
+
+[![Download](https://img.shields.io/badge/Download-ZIP-5b8cff?style=for-the-badge)](https://github.com/KnoxxiY/NetzTopo/archive/refs/heads/main.zip)
+![Windows](https://img.shields.io/badge/Windows-7%20bis%2011-0078D6?style=for-the-badge&logo=windows)
+![Linux](https://img.shields.io/badge/Linux-x86__64-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Lizenz](https://img.shields.io/badge/Lizenz-MIT-22c55e?style=for-the-badge)
+
+<img src="docs/uebersicht.png" alt="Übersicht" width="900">
+
+</div>
+
+---
+
+## 🚀 Schnellstart
+
+1. **[NetzTopo herunterladen](https://github.com/KnoxxiY/NetzTopo/archive/refs/heads/main.zip)**. Alternativ oben auf den grünen Button **Code → Download ZIP** klicken.
+2. Die ZIP mit Rechtsklick → **Alle extrahieren** entpacken.
+3. Den passenden Ordner öffnen:
+
+| Ordner | Für | Start |
+|---|---|---|
+| **`Windows`** | den PC (Windows 7 bis 11, 32/64 Bit) | `NetzTopo starten.bat` |
+| **`Portable`** | den USB-Stick, zusätzlich mit Linux | Windows: `NetzTopo starten.bat` · Linux: `sh netztopo.sh` |
+
+4. Netz eintragen, zum Beispiel `192.168.1.0/24`, und die SNMP-Community der Switches angeben. Dann auf **Scan starten** klicken.
+
+Python muss nicht installiert sein, es ist dabei. Der Ordner lässt sich überallhin kopieren, auch auf einen USB-Stick.
+
+---
+
+## 📸 Ansichten
+
+| | |
 |---|---|
-| **Windows** (`NetzTopo-Windows.zip`) | Entpacken → **`NetzTopo.exe`** doppelklicken |
-| **USB-Stick** (`NetzTopo-Portable.zip`) | Auf den Stick entpacken → Windows: `NetzTopo.exe`, Linux: `sh netztopo.sh` |
+| **Karte** – alle Geräte und Verbindungen<br><img src="docs/karte.png" width="430"> | **Netzplan** – Internet → Firewall → Switches → Geräte<br><img src="docs/netzplan.png" width="430"> |
+| **Schränke & Switches** – Port-Belegung, PoE, Kabelfehler<br><img src="docs/switches.png" width="430"> | **💥 Ausfall-Simulator** – was fällt mit aus?<br><img src="docs/ausfall.png" width="430"> |
+| **🛡️ Sicherheit** – Note A–E mit Lösungen<br><img src="docs/sicherheit.png" width="430"> | **IP-Plan** – jede Adresse auf einen Blick<br><img src="docs/ip-plan.png" width="430"> |
 
-- Es muss **kein Python** installiert sein und es braucht **keine Admin-Rechte**.
-- Alle Daten (Berichte, Einstellungen, Verlauf) liegen im Ordner **`Daten`**.
-- Gibt es keine Fenster-Oberfläche, öffnet sich automatisch eine im Browser. Mit `NetzTopo im Browser.bat` erzwingst du das.
+---
 
-**Läuft auf:** Windows 11 / 10 / 8.1 (32 und 64 Bit), Windows 7 SP1 (mit Update KB2999226), Linux x86_64. Auf macOS und Raspberry Pi wird das vorhandene `python3` genutzt.
+## ✨ Funktionen
 
-## Bedienung
+**Erkennen**
+- Ping, ARP, Port-Scan, NetBIOS, DNS, UPnP/SSDP, HTTP-Titel und TLS-Zertifikate
+- **SNMP + LLDP/CDP + MAC-Tabellen**: ordnet jedes Gerät seinem Switch-Port zu, mit Zuverlässigkeit *hoch / mittel / vermutet / bestätigt*
+- Erkennt Mini-Switches ohne SNMP, VMs auf Hypervisoren, PoE, Seriennummern, Tonerstände, CRC-Fehler und Halbduplex
 
-1. Netz eintragen, zum Beispiel `192.168.150.0/24`. Dein eigenes Netz wird automatisch erkannt.
-2. Bei **SNMP-Communities** die Community eurer Switches eintragen.
-3. **Scan starten**. Danach öffnet sich der Bericht im Browser.
+**Verstehen**
+- **💥 Ausfall-Simulator:** Rangliste der kritischsten Punkte (Single Points of Failure)
+- **🛡️ Sicherheits-Check:** Telnet, FTP, HTTP-Verwaltung, Standard-SNMP, ablaufende Zertifikate, alte SSH-Versionen, Kameras/IoT ohne Netztrennung
+- **Engpass-Finder:** 100-Mbit-Uplinks, zu langsam angebundene Server
+- **Das Netz in Klartext:** eine automatische Zusammenfassung
+- **Datenqualität 0–100** mit den nächsten sinnvollen Schritten
 
-**Der Bericht hat diese Reiter:**
+**Arbeiten**
+- 🖨️ **Notfallblatt** für den Serverschrank, mit Hochfahr-Reihenfolge nach Stromausfall
+- 🏷️ **Kabel-Etiketten**, ✅ **Prüfliste** für die Begehung, **Sicherheitsbericht** zum Abhaken
+- 🔴 **Live-Überwachung** und ⚡ **Wake-on-LAN** (in der Browser-Oberfläche)
+- 🔎 **Profi-Suche:** `typ:drucker toner`, `port:3389 typ:pc`, `ip:10.0.0.0/25`, `unsicher`, `-vm` …
+- **Geräteverlauf:** neu, offline, zuletzt gesehen; geplante Scans mit **Alarm** per Teams oder ntfy
 
-| Reiter | Inhalt |
+---
+
+## 📦 Export – für jede Software
+
+Nach jedem Scan landen im Ordner `export` diese Dateien:
+
+| Datei | Für |
 |---|---|
-| Übersicht | Datenqualität, nächste Schritte, Auffälligkeiten |
-| Netzplan | Internet → Firewall → Switches → Gerätegruppen |
-| Karte | alle Geräte frei angeordnet, mit 🧭 „Weg ins Internet“ |
-| Schränke & Switches | Frontansicht jedes Switches mit Port-Belegung |
-| Tabelle | alle Geräte, durchsuchbar |
+| `netztopo.xlsx` | Excel, mit 7 Blättern: Geräte, Switch-Ports, Verbindungen, Hinweise, Sicherheit, Ausfallrisiko, IP-Plan |
+| `*.csv` | Excel (Semikolon) oder international (Komma, RFC 4180), zum Beispiel für GLPI, Snipe-IT, i-doit, Lansweeper, NetBox |
+| `netztopo.json` | eigene Skripte und APIs |
+| `topologie.graphml` | yEd, Gephi, Cytoscape |
+| draw.io / PNG | Wikis, Präsentationen |
 
-## Wichtig für ein genaues Ergebnis
+---
 
-- **SNMP (nur lesen) und LLDP auf allen managed Switches aktivieren.** Ohne SNMP sieht kein Tool, was an welchem Port hängt.
-- Jede Zuordnung hat eine **Zuverlässigkeit**:
-  - **hoch:** einziges Gerät am Port
-  - **mittel:** 2 Geräte am Port
-  - **vermutet:** irgendwo dahinter
-  - **bestätigt:** vor Ort geprüft
-- **Für ~100 % Genauigkeit:** **🖨️ Prüfliste** drucken und vor Ort abhaken. Danach die Ergebnisse in die **Korrekturliste** eintragen (Excel, Spalten `switch`, `port`, `bestaetigt`). Die Datei als `korrekturen.csv` in den NetzTopo-Ordner legen und `--rebuild` ausführen.
-- In der Korrekturliste kannst du außerdem Namen, Typen, **Schränke** und **Höheneinheiten** pflegen. Daraus entsteht die Rack-Ansicht.
+## 🎯 Genauigkeit
 
-## Extras
+- Aktiviere **SNMP (nur lesen) und LLDP** auf den managed Switches. Ohne diese Daten kann kein Tool wissen, was an welchem Port hängt.
+- Unmanaged Mini-Switches sind für jeden Scanner unsichtbar. Mit diesen Schritten wird der Plan trotzdem nahezu fehlerfrei:
+  1. **Prüfliste** drucken.
+  2. Vor Ort abhaken.
+  3. Die Ergebnisse in `korrekturen.csv` eintragen.
+  4. `--rebuild` ausführen.
+- In der Korrekturliste pflegst du auch Namen, Typen, Schränke und Höheneinheiten. Daraus entsteht die Rack-Ansicht.
 
-- **Export:** CSV, PNG, draw.io (z. B. für BookStack), Import-Dateien für NetBox oder direkter Abgleich über die API
-- **Automatisch scannen:** Windows-Aufgabe, die regelmäßig scannt. Sie baut den Geräteverlauf auf und meldet neue Geräte an Teams.
-- **Anonymer Export:** Scan ohne Namen und MAC-Endungen, zum Weitergeben bei Problemen
+---
 
-## Kommandozeile
+## ⌨️ Kommandozeile
 
 ```
-NetzTopo.exe --cli 192.168.150.0/24 --community public
-NetzTopo.exe --auto        mit gespeicherten Einstellungen scannen
-NetzTopo.exe --rebuild     Bericht aus dem letzten Scan neu erzeugen
-NetzTopo.exe --web         Browser-Oberfläche
-NetzTopo.exe --help
+netztopo --cli 192.168.1.0/24 --community public   Scan ohne Oberfläche
+netztopo --auto                                     mit gespeicherten Einstellungen (geplante Aufgabe)
+netztopo --rebuild                                  Bericht aus letztem Scan neu erzeugen
+netztopo --web                                      Browser-Oberfläche
+netztopo --demo                                     Beispielbericht ohne Scan
 ```
 
-## Hinweise
+Unter Windows ersetzt du `netztopo` durch `"NetzTopo starten.bat"`, mit vorhandenem Python ab 3.8 durch `python netztopo.py`.
 
-- Der Scan ist **nur lesend**: Ping, Verbindungstests, SNMP-Abfragen. An Geräten wird nichts verändert.
-- Der Virenschutz kann einen Netzwerkscanner melden. Nutze das Tool nur in Netzen, für die du zuständig bist.
-- Der NetBox-Token wird pro Benutzer und PC verschlüsselt gespeichert. Auf einem anderen PC musst du ihn neu eintragen.
-- Probleme? Die Details stehen in `Daten\netztopo-fehler.log`.
+---
+
+## 🔒 Sicherheit und Datenschutz
+
+- Der Scan ist **nur lesend**: Ping, Verbindungsaufbau, SNMP-GET. An Geräten wird nichts verändert.
+- Alles bleibt lokal. Es geht nichts in eine Cloud. Der optionale Webhook wird unter Windows verschlüsselt gespeichert (DPAPI).
+- Für Support-Anfragen gibt es einen **anonymen Export**, in dem Namen und Adressen ersetzt sind.
+- ⚠️ Scanne nur Netze, für die du zuständig bist. Virenscanner können Netzwerk-Scanner melden.
+
+**Läuft auf:**
+- Windows 11, 10 und 8.1 (32 und 64 Bit)
+- Windows 7 SP1 (mit Update KB2999226)
+- Linux x86_64
+- macOS und Raspberry Pi, wenn `python3` vorhanden ist
+
+---
+
+## 🛠️ Entwicklung
+
+```
+Das komplette Programm steckt in einer Datei: Windows/app/netztopo.py (lesbar, läuft ab Python 3.8 auch direkt mit: python netztopo.py)
+```
+
+Änderungen stehen in [`CHANGELOG.md`](CHANGELOG.md). Lizenz: [MIT](LICENSE). Komponenten von Drittanbietern: [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).

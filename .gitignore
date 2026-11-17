@@ -1,0 +1,11 @@
+# Persoenliche Daten nie hochladen
+**/Daten/*
+!**/Daten/.gitkeep
+korrekturen.csv
+netztopo-einstellungen.json
+scan-*.json
+inventar.db
+netztopo-fehler.log
+start-diagnose.txt
+__pycache__/
+*.pyc
